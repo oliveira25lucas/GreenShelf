@@ -4,6 +4,7 @@ import br.com.oliveira25lucas.greenShelf.model.Person;
 import br.com.oliveira25lucas.greenShelf.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,24 +17,21 @@ public class PersonController   {
     @Autowired
     private PersonService personService;
 
-    @RequestMapping(
-            method = RequestMethod.GET,
+    @GetMapping(
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public List<Person> findAll(){
         return personService.findAll();
     }
 
-    @RequestMapping(value = "/{id}",
-            method = RequestMethod.GET,
+    @GetMapping(value = "/{id}",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public Person findById(@PathVariable("id") String id){
+    public Person findById(@PathVariable("id") Long id){
         return personService.findById(id);
     }
     
-    @RequestMapping(
-            method = RequestMethod.POST,
+    @PostMapping(
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -41,8 +39,7 @@ public class PersonController   {
         return personService.createPerson(person);
     }
 
-    @RequestMapping(
-            method = RequestMethod.PUT,
+    @PutMapping(
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -50,11 +47,10 @@ public class PersonController   {
         return personService.updatePerson(person);
     }
 
-    @RequestMapping(value = "/{id}",
-            method = RequestMethod.DELETE
-    )
-    public void deletePerson(@PathVariable("id") String id){
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<?> deletePerson(@PathVariable("id") Long id){
          personService.deletePerson(id);
+         return ResponseEntity.noContent().build();
     }
 
 

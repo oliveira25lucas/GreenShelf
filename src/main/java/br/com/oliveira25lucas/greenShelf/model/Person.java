@@ -1,5 +1,6 @@
 package br.com.oliveira25lucas.greenShelf.model;
 
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.web.bind.annotation.RestController;
@@ -7,16 +8,28 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
+@Table(name = "Person")
 @Getter
 @Setter
 public class Person implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "first_name", nullable = false, length = 80)
     private String firstName;
+
+    @Column(name = "last_name", nullable = false, length = 80)
     private String lastName;
+
+    @Column(nullable = false, length = 250)
     private String address;
+
+    @Column(nullable = false, length = 20)
     private String gender;
 
     public Person() {}
