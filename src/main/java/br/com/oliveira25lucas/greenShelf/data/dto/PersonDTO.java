@@ -1,4 +1,4 @@
-package br.com.oliveira25lucas.greenShelf.model;
+package br.com.oliveira25lucas.greenShelf.data.dto;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -7,35 +7,23 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.util.Objects;
 
-@Entity
-@Table(name = "Person")
 @Getter
 @Setter
-public class Person implements Serializable {
+public class PersonDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "first_name", nullable = false, length = 80)
     private String firstName;
-
-    @Column(name = "last_name", nullable = false, length = 80)
     private String lastName;
-
-    @Column(nullable = false, length = 250)
     private String address;
-
-    @Column(nullable = false, length = 20)
     private String gender;
 
-    public Person() {}
+    public PersonDTO() {}
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Person person)) return false;
+        if (!(o instanceof PersonDTO person)) return false;
         return Objects.equals(getId(), person.getId()) && Objects.equals(getFirstName(), person.getFirstName()) && Objects.equals(getLastName(), person.getLastName()) && Objects.equals(getAddress(), person.getAddress()) && Objects.equals(getGender(), person.getGender());
     }
 

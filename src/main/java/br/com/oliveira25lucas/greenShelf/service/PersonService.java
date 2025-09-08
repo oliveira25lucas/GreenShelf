@@ -1,5 +1,6 @@
 package br.com.oliveira25lucas.greenShelf.service;
 
+import br.com.oliveira25lucas.greenShelf.data.dto.PersonDTO;
 import br.com.oliveira25lucas.greenShelf.exception.ResourceNotFoundException;
 import br.com.oliveira25lucas.greenShelf.model.Person;
 import br.com.oliveira25lucas.greenShelf.repository.PersonRepository;
@@ -8,9 +9,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
+
+import static br.com.oliveira25lucas.greenShelf.mapper.ObjectMapper.parseListObjects;
+import static br.com.oliveira25lucas.greenShelf.mapper.ObjectMapper.parseObject;
 
 @Service
 public class PersonService {
@@ -21,46 +24,50 @@ public class PersonService {
     @Autowired
     PersonRepository repository;
 
-    public List<Person> findAll() {
+
+    public List<PersonDTO> findAll() {
+
         logger.info("Finding all People!");
 
-        return repository.findAll();
+        return parseListObjects(repository.findAll(), PersonDTO.class);
     }
 
+    public PersonDTO findById(Long id) {
+        logger.info("Finding one Person!");
 
-    public Person findById(Long id) {
-        logger.info("Finding one Person! The id is " + id);
-
-        return repository.findById(id)
-                .orElseThrow(()-> new ResourceNotFoundException("No records found for this id!"));
+        var entity = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
+        return parseObject(entity, PersonDTO.class);
     }
 
-    public Person createPerson(Person person) {
-        logger.info("Creating one person");
+    public PersonDTO create(PersonDTO person) {
 
-        return repository.save(person);
+        logger.info("Creating one Person!");
+        var entity = parseObject(person, Person.class);
+
+        return parseObject(repository.save(entity), PersonDTO.class);
     }
 
-    public Person updatePerson(Person person) {
+    public PersonDTO update(PersonDTO person) {
 
-        logger.info("Update one person");
+        logger.info("Updating one Person!");
         Person entity = repository.findById(person.getId())
-                .orElseThrow(()-> new ResourceNotFoundException("No records found for this id!"));
+                .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
 
         entity.setFirstName(person.getFirstName());
         entity.setLastName(person.getLastName());
         entity.setAddress(person.getAddress());
         entity.setGender(person.getGender());
 
-        return repository.save(person);
+        return parseObject(repository.save(entity), PersonDTO.class);
     }
 
-    public void deletePerson(Long id) {
-        logger.info("Deleting one Person! The id is " + id);
+    public void delete(Long id) {
+
+        logger.info("Deleting one Person!");
 
         Person entity = repository.findById(id)
-                .orElseThrow(()-> new ResourceNotFoundException("No records found for this id!"));
-
+                .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
         repository.delete(entity);
     }
 }
