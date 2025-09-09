@@ -56,6 +56,7 @@ public class PersonService {
 
         entity.setFirstName(person.getFirstName());
         entity.setLastName(person.getLastName());
+        entity.setBirthDate(person.getBirthDate());
         entity.setAddress(person.getAddress());
         entity.setGender(person.getGender());
 

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 
 @Getter
@@ -16,6 +17,7 @@ public class PersonDTO implements Serializable {
     private Long id;
     private String firstName;
     private String lastName;
+    private Date birthDate;
     private String address;
     private String gender;
 
