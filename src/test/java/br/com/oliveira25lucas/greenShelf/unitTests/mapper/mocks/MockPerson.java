@@ -1,5 +1,6 @@
 package br.com.oliveira25lucas.greenShelf.unitTests.mapper.mocks;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +40,7 @@ public class MockPerson {
         personDTO.setGender(((number % 2)==0) ? "Male" : "Female");
         personDTO.setId(number.longValue());
         personDTO.setLastName("Last Name Test" + number);
+        personDTO.setPhoneNumber("Phone Number Test" + number);
         return personDTO;
     }
 
@@ -49,6 +51,7 @@ public class MockPerson {
         personDTO.setGender(((number % 2)==0) ? "Male" : "Female");
         personDTO.setId(number.longValue());
         personDTO.setLastName("Last Name Test" + number);
+        personDTO.setPhoneNumber("Phone Number Test" + number);
         return personDTO;
     }
 
