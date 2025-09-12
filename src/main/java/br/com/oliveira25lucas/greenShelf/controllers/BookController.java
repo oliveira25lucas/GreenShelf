@@ -1,6 +1,6 @@
 package br.com.oliveira25lucas.greenShelf.controllers;
 
-import br.com.oliveira25lucas.greenShelf.data.dto.PersonDTO;
+import br.com.oliveira25lucas.greenShelf.data.dto.BookDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -8,66 +8,67 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
-public interface PersonController {
+public interface BookController {
 
-    @Operation(summary = "Find all people",
-            description = "FInd all people",
-            tags = {"People"},
+    @Operation(summary = "Find all books",
+            description = "FInd all books",
+            tags = {"Book"},
             responses = {
-                    @ApiResponse(description = "Success", responseCode = "200", content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE, array = @ArraySchema(schema = @Schema(implementation = PersonDTO.class)))}),
+                    @ApiResponse(description = "Success", responseCode = "200", content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE, array = @ArraySchema(schema = @Schema(implementation = BookDTO.class)))}),
                     @ApiResponse(description = "No content", responseCode = "204", content = @Content),
                     @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
                     @ApiResponse(description = "Not found", responseCode = "404", content = @Content),
                     @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
             })
-    List<PersonDTO> findAll();
+    List<BookDTO> findAll();
 
 
-    @Operation(summary = "Find a person",
-            description = "Find a specific person by your ID",
-            tags = {"People"},
+    @Operation(summary = "Find a book",
+            description = "Find a specific book by your ID",
+            tags = {"Book"},
             responses = {
-                    @ApiResponse(description = "Success", responseCode = "200", content = {@Content(schema = @Schema(implementation = PersonDTO.class))}),
+                    @ApiResponse(description = "Success", responseCode = "200", content = {@Content(schema = @Schema(implementation = BookDTO.class))}),
                     @ApiResponse(description = "No content", responseCode = "204", content = @Content),
                     @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
                     @ApiResponse(description = "Not found", responseCode = "404", content = @Content),
                     @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
             })
-    PersonDTO findById(@PathVariable("id") Long id);
+    BookDTO findById(@PathVariable("id") Long id);
 
-    @Operation(summary = "Create a person",
-            description = "Create a person",
-            tags = {"People"},
+    @Operation(summary = "Create a book",
+            description = "Create a book",
+            tags = {"Book"},
             responses = {
-                    @ApiResponse(description = "Success", responseCode = "200", content = {@Content(schema = @Schema(implementation = PersonDTO.class))}),
+                    @ApiResponse(description = "Success", responseCode = "200", content = {@Content(schema = @Schema(implementation = BookDTO.class))}),
                     @ApiResponse(description = "No content", responseCode = "204", content = @Content),
                     @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
                     @ApiResponse(description = "Not found", responseCode = "404", content = @Content),
                     @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
             })
-    PersonDTO create(@RequestBody PersonDTO person);
+    BookDTO create(@RequestBody BookDTO book);
 
-    @Operation(summary = "Update a person",
-            description = "Update a person",
-            tags = {"People"},
+    @Operation(summary = "Update a book",
+            description = "Update a book",
+            tags = {"Book"},
             responses = {
-                    @ApiResponse(description = "Success", responseCode = "200", content = {@Content(schema = @Schema(implementation = PersonDTO.class))}),
+                    @ApiResponse(description = "Success", responseCode = "200", content = {@Content(schema = @Schema(implementation = BookDTO.class))}),
                     @ApiResponse(description = "No content", responseCode = "204", content = @Content),
                     @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
                     @ApiResponse(description = "Not found", responseCode = "404", content = @Content),
                     @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
             })
-    PersonDTO update(@RequestBody PersonDTO person);
+    BookDTO update(@RequestBody BookDTO book);
 
-    @Operation(summary = "Delete a person",
-            description = "Delete a person",
-            tags = {"People"},
+    @Operation(summary = "Delete a book",
+            description = "Delete a book",
+            tags = {"Book"},
             responses = {
-                    @ApiResponse(description = "Success", responseCode = "200", content = {@Content(schema = @Schema(implementation = PersonDTO.class))}),
+                    @ApiResponse(description = "Success", responseCode = "200", content = {@Content(schema = @Schema(implementation = BookDTO.class))}),
                     @ApiResponse(description = "No content", responseCode = "204", content = @Content),
                     @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
                     @ApiResponse(description = "Not found", responseCode = "404", content = @Content),

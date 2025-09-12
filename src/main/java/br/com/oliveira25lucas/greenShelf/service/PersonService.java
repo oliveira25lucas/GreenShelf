@@ -1,6 +1,6 @@
 package br.com.oliveira25lucas.greenShelf.service;
 
-import br.com.oliveira25lucas.greenShelf.controllers.PersonController;
+import br.com.oliveira25lucas.greenShelf.controllers.docs.PersonControllerImpl;
 import br.com.oliveira25lucas.greenShelf.data.dto.PersonDTO;
 import br.com.oliveira25lucas.greenShelf.exception.RequiredObjectIsNullException;
 import br.com.oliveira25lucas.greenShelf.exception.ResourceNotFoundException;
@@ -13,7 +13,6 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
 import static br.com.oliveira25lucas.greenShelf.mapper.ObjectMapper.parseListObjects;
 import static br.com.oliveira25lucas.greenShelf.mapper.ObjectMapper.parseObject;
@@ -93,10 +92,10 @@ public class PersonService {
     }
 
     private void addHateoasLinks(PersonDTO dto) {
-        dto.add(linkTo(methodOn(PersonController.class).create(dto)).withRel("create").withType("POST"));
-        dto.add(linkTo(methodOn(PersonController.class).findById(dto.getId())).withSelfRel().withType("GET"));
-        dto.add(linkTo(methodOn(PersonController.class).findAll()).withRel("findALl").withType("GET"));
-        dto.add(linkTo(methodOn(PersonController.class).update(dto)).withRel("update").withType("PUT"));
-        dto.add(linkTo(methodOn(PersonController.class).delete(dto.getId())).withRel("delete").withType("DELETE"));
+        dto.add(linkTo(methodOn(PersonControllerImpl.class).create(dto)).withRel("create").withType("POST"));
+        dto.add(linkTo(methodOn(PersonControllerImpl.class).findById(dto.getId())).withSelfRel().withType("GET"));
+        dto.add(linkTo(methodOn(PersonControllerImpl.class).findAll()).withRel("findALl").withType("GET"));
+        dto.add(linkTo(methodOn(PersonControllerImpl.class).update(dto)).withRel("update").withType("PUT"));
+        dto.add(linkTo(methodOn(PersonControllerImpl.class).delete(dto.getId())).withRel("delete").withType("DELETE"));
     }
 }

@@ -20,3 +20,8 @@ logging:
   level:
     root: INFO
     br.com.oliveira25lucas.greenShelf: INFO
+
+spring-doc:
+  paths-to-match: /person/**
+  swagger-ui:
+    use-root-path: true
